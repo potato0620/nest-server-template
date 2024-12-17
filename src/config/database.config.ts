@@ -14,5 +14,3 @@ export const DatabaseConfig = registerAs('database', () => ({
 }));
 
 export type IDatabaseConfig = ConfigType<typeof DatabaseConfig>;
-
-export default DatabaseConfig;
