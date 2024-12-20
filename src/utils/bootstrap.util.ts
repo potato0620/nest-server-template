@@ -1,43 +1,46 @@
-import os from 'os';
-import { Logger, INestApplication } from '@nestjs/common';
+import type { INestApplication } from '@nestjs/common'
+import type {
+  OpenAPIObject,
+  SwaggerCustomOptions,
+} from '@nestjs/swagger'
+import os from 'node:os'
+import { Logger } from '@nestjs/common'
 import {
   DocumentBuilder,
   SwaggerModule,
-  OpenAPIObject,
-  SwaggerCustomOptions,
-} from '@nestjs/swagger';
+} from '@nestjs/swagger'
 
 export function getLocalIPv4Address() {
-  const interfaces = os.networkInterfaces();
+  const interfaces = os.networkInterfaces()
   for (const name of Object.keys(interfaces)) {
     for (const iface of interfaces[name]) {
       // 检查是否为IPv4地址且不是内部地址
       if (iface.family === 'IPv4' && !iface.internal) {
-        return iface.address;
+        return iface.address
       }
     }
   }
-  return '';
+  return ''
 }
 
 export async function printStartMessage(
   app: INestApplication,
   options: Record<string, string>,
 ): Promise<void> {
-  const port = options.port || 3000;
-  const localIp = getLocalIPv4Address();
+  const port = options.port || 3000
+  const localIp = getLocalIPv4Address()
 
   await app.listen(port, '0.0.0.0', async () => {
-    const logger = new Logger('NestApplication');
-    const url = await app.getUrl();
+    const logger = new Logger('NestApplication')
+    const url = await app.getUrl()
 
-    logger.log(`Server running: ${url}`);
-    logger.log(`LocalIP Server running: http://${localIp}:${port}`);
+    logger.log(`Server running: ${url}`)
+    logger.log(`LocalIP Server running: http://${localIp}:${port}`)
 
     // open api
-    logger.log(`Swagger: ${url}/${options.prefix}/docs`);
-    logger.log(`Swagger: http://${localIp}:${port}/${options.prefix}/docs`);
-  });
+    logger.log(`Swagger: ${url}/${options.prefix}/docs`)
+    logger.log(`Swagger: http://${localIp}:${port}/${options.prefix}/docs`)
+  })
 }
 
 export function swaggerConfig(
@@ -52,20 +55,20 @@ export function swaggerConfig(
       type: 'http',
       description: '调取登陆接口获取token后填入，通过认证以调用以下接口',
     })
-    .build();
+    .build()
   const documentFactory = (): OpenAPIObject =>
-    SwaggerModule.createDocument(app, config);
+    SwaggerModule.createDocument(app, config)
 
   const customOptions: SwaggerCustomOptions = {
     customSiteTitle: 'Server API', // html title
     raw: true, // 允许访问原始数据
     url: '/docs-json',
-  };
+  }
 
   SwaggerModule.setup(
     options.prefix ? `${options.prefix}/docs` : 'docs',
     app,
     documentFactory,
     customOptions,
-  );
+  )
 }

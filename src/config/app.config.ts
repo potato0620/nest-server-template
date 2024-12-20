@@ -1,5 +1,6 @@
-import { registerAs, ConfigType } from '@nestjs/config';
+import type { ConfigType } from '@nestjs/config'
+import { registerAs } from '@nestjs/config'
 
-export const AppConfig = registerAs('app', () => ({}));
+export const AppConfig = registerAs('app', () => ({}))
 
-export type IAppConfig = ConfigType<typeof AppConfig>;
+export type IAppConfig = ConfigType<typeof AppConfig>

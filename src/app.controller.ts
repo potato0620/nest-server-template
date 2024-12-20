@@ -1,6 +1,5 @@
-import { Controller, Get } from '@nestjs/common';
-
-import { ConfigService } from '@nestjs/config';
+import { Controller, Get } from '@nestjs/common'
+import { ConfigService } from '@nestjs/config'
 
 @Controller()
 export class AppController {
@@ -8,6 +7,6 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    return 'helle world';
+    return 'helle world'
   }
 }

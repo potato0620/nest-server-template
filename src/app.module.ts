@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
-import { ThrottlerModule } from '@nestjs/throttler';
-import { AppController } from './app.controller';
-import { ConfigModule } from '@nestjs/config';
-import Configs from '~/config';
+import { Module } from '@nestjs/common'
+import { ConfigModule } from '@nestjs/config'
+import { ThrottlerModule } from '@nestjs/throttler'
+import Configs from '~/config'
+import { AppController } from './app.controller'
 
 @Module({
   imports: [

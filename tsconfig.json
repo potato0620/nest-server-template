@@ -1,27 +1,32 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "lib": ["ESNext"],
+    "incremental": true,
     "target": "ESNext",
-    "esModuleInterop": true,
-    "declaration": true,
-    "removeComments": true,
+    "lib": ["ESNext"],
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
-    "outDir": "./dist",
     "baseUrl": "./",
+    "module": "commonjs",
     "paths": {
       "~/*": ["src/*"]
     },
-    "incremental": true,
-    "skipLibCheck": true,
-    "strictNullChecks": false,
-    "noImplicitAny": false,
     "strictBindCallApply": false,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "allowUnreachableCode": false,
+    "alwaysStrict": true,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": false,
+    "noImplicitAny": false,
+    "declaration": true,
+
+    "outDir": "./dist",
+    "removeComments": true,
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "skipLibCheck": true
   },
   "exclude": ["node_modules", "scripts", "dist"]
 }
