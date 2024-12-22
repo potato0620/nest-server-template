@@ -1,19 +1,13 @@
 import type { INestApplication } from '@nestjs/common'
-import type {
-  OpenAPIObject,
-  SwaggerCustomOptions,
-} from '@nestjs/swagger'
+import type { OpenAPIObject, SwaggerCustomOptions } from '@nestjs/swagger'
 import os from 'node:os'
 import { Logger } from '@nestjs/common'
-import {
-  DocumentBuilder,
-  SwaggerModule,
-} from '@nestjs/swagger'
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 
 export function getLocalIPv4Address() {
   const interfaces = os.networkInterfaces()
   for (const name of Object.keys(interfaces)) {
-    for (const iface of interfaces[name]) {
+    for (const iface of interfaces[name]!) {
       // 检查是否为IPv4地址且不是内部地址
       if (iface.family === 'IPv4' && !iface.internal) {
         return iface.address
@@ -34,6 +28,7 @@ export async function printStartMessage(
     const logger = new Logger('NestApplication')
     const url = await app.getUrl()
 
+    logger.log(`🎉 start successfully ~ =============================`)
     logger.log(`Server running: ${url}`)
     logger.log(`LocalIP Server running: http://${localIp}:${port}`)
 
